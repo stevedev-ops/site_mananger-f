@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Modal from '../../components/common/Modal';
-import { FaFileAlt, FaSearch, FaEye, FaMapMarkerAlt, FaUserTie, FaCheck, FaTimes, FaComment } from 'react-icons/fa';
+import { FaFileAlt, FaSearch, FaEye, FaMapMarkerAlt, FaUserTie, FaComment } from 'react-icons/fa';
 
 interface Report {
     id: string;
