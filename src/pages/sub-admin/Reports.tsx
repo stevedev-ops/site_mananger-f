@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Modal from '../../components/common/Modal';
-import { FaFileAlt, FaSearch, FaEye, FaMapMarkerAlt, FaUserTie, FaCheck, FaTimes, FaComment } from 'react-icons/fa';
+import { FaFileAlt, FaSearch, FaEye, FaMapMarkerAlt, FaUserTie, FaComment } from 'react-icons/fa';
 
 interface Report {
     id: string;
@@ -148,8 +148,8 @@ const SubAdminReports: React.FC = () => {
                                         <td className="p-4 text-gray-600">{report.supervisor?.name || 'N/A'}</td>
                                         <td className="p-4">
                                             <span className={`px-2 py-1 text-xs rounded-full font-medium ${report.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
-                                                    report.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
-                                                        'bg-yellow-100 text-yellow-700'
+                                                report.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
+                                                    'bg-yellow-100 text-yellow-700'
                                                 }`}>
                                                 {report.status}
                                             </span>
@@ -185,8 +185,8 @@ const SubAdminReports: React.FC = () => {
                                 </p>
                             </div>
                             <span className={`px-3 py-1 text-sm rounded-full font-medium ${selectedReport.status === 'APPROVED' ? 'bg-green-100 text-green-700' :
-                                    selectedReport.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
-                                        'bg-yellow-100 text-yellow-700'
+                                selectedReport.status === 'REJECTED' ? 'bg-red-100 text-red-700' :
+                                    'bg-yellow-100 text-yellow-700'
                                 }`}>
                                 {selectedReport.status}
                             </span>
