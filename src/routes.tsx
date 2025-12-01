@@ -18,6 +18,7 @@ import Clients from './pages/admin/Clients';
 import Reports from './pages/admin/Reports';
 import Users from './pages/admin/Users';
 import SubAdmins from './pages/admin/SubAdmins';
+import Milestones from './pages/admin/Milestones';
 
 // Supervisor Pages
 import SupervisorDashboard from './pages/supervisor/Dashboard';
@@ -76,6 +77,7 @@ const AppRoutes: React.FC = () => {
                 <Route path="clients" element={<Clients />} />
                 <Route path="reports" element={<Reports />} />
                 <Route path="users" element={<Users />} />
+                <Route path="milestones" element={<Milestones />} />
             </Route>
 
             {/* Supervisor Routes */}

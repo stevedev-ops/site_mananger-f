@@ -8,7 +8,7 @@ const Login: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const { login } = useAuth();
+    const { login, user } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -89,12 +89,6 @@ const Login: React.FC = () => {
                         {loading ? 'Signing in...' : 'Sign In'}
                     </button>
                 </form>
-
-                <div className="mt-6 text-center text-sm text-gray-600">
-                    <p>Demo Accounts:</p>
-                    <p className="text-xs mt-1">Super Admin: superadmin@test.com / password</p>
-                    <p className="text-xs">Admin: admin@test.com / password</p>
-                </div>
             </div>
         </div>
     );

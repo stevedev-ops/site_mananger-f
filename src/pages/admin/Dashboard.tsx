@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { FaMapMarkedAlt, FaHardHat, FaFileAlt, FaExclamationTriangle, FaUsers } from 'react-icons/fa';
 import api from '../../services/api';
+import { FaMapMarkedAlt, FaHardHat, FaFileAlt, FaExclamationTriangle, FaUsers } from 'react-icons/fa';
 
 const StatCard: React.FC<{ title: string; value: string | number; icon: any; color: string }> = ({
     title,
@@ -26,7 +26,6 @@ const Dashboard: React.FC = () => {
         reports: 0,
         alerts: 0,
     });
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -52,25 +51,11 @@ const Dashboard: React.FC = () => {
                 });
             } catch (error) {
                 console.error('Failed to fetch dashboard stats', error);
-            } finally {
-                setLoading(false);
             }
         };
 
         fetchStats();
     }, []);
-
-    if (loading) {
-        return (
-            <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                    <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
-                    <div className="text-sm text-gray-500">Organization Overview</div>
-                </div>
-                <div className="bg-white rounded-xl shadow-sm p-6 text-center text-gray-500">Loading dashboard...</div>
-            </div>
-        );
-    }
 
     return (
         <div className="space-y-6">

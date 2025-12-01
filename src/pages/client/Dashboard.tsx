@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import { FaBuilding, FaHardHat, FaCheckCircle, FaClock } from 'react-icons/fa';
 
 const StatCard: React.FC<{ title: string; value: string | number; icon: any; color: string }> = ({
@@ -27,13 +28,31 @@ const ClientDashboard: React.FC = () => {
     });
 
     useEffect(() => {
-        // Mock data fetch
-        setStats({
-            activeSites: 2,
-            completedSites: 1,
-            totalReports: 45,
-            daysActive: 120,
-        });
+        const fetchStats = async () => {
+            try {
+                const [sitesRes, reportsRes] = await Promise.all([
+                    api.get('/sites'),
+                    api.get('/reports')
+                ]);
+
+                const sites = sitesRes.data.data.data || sitesRes.data.data || [];
+                const reports = reportsRes.data.data.data || reportsRes.data.data || [];
+
+                const activeSites = sites.filter((s: any) => s.status === 'ACTIVE').length;
+                const completedSites = sites.filter((s: any) => s.status === 'COMPLETED').length;
+
+                setStats({
+                    activeSites,
+                    completedSites,
+                    totalReports: reports.length,
+                    daysActive: 0, // TODO: Calculate based on user creation date
+                });
+            } catch (error) {
+                console.error('Failed to fetch client dashboard stats', error);
+            }
+        };
+
+        fetchStats();
     }, []);
 
     return (

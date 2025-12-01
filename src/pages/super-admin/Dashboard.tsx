@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import api from '../../services/api';
 import { FaBuilding, FaUsers, FaMapMarkedAlt, FaCheckCircle } from 'react-icons/fa';
 
 const StatCard: React.FC<{ title: string; value: string | number; icon: any; color: string }> = ({
@@ -27,14 +28,30 @@ const Dashboard: React.FC = () => {
     });
 
     useEffect(() => {
-        // In a real app, we'd fetch global stats here
-        // For now, using mock data or we could add a global stats endpoint
-        setStats({
-            organizations: 12,
-            users: 450,
-            sites: 89,
-            activeSites: 64,
-        });
+        const fetchStats = async () => {
+            try {
+                const [orgsRes, usersRes, sitesRes] = await Promise.all([
+                    api.get('/organizations'),
+                    api.get('/users'),
+                    api.get('/sites')
+                ]);
+
+                const organizations = orgsRes.data.data.data || orgsRes.data.data || [];
+                const users = usersRes.data.data.data || usersRes.data.data || [];
+                const sites = sitesRes.data.data.data || sitesRes.data.data || [];
+
+                setStats({
+                    organizations: organizations.length,
+                    users: users.length,
+                    sites: sites.length,
+                    activeSites: sites.filter((s: any) => s.status === 'ACTIVE').length,
+                });
+            } catch (error) {
+                console.error('Failed to fetch super admin dashboard stats', error);
+            }
+        };
+
+        fetchStats();
     }, []);
 
     return (
